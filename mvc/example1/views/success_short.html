@@ -1,0 +1,22 @@
+Congratulations! <br />
+Your url: <span id="urlValue">{{url}}</span> where the short url is <strong><span id="shortValue"></span></strong>
+
+<script>
+    // function to get the last part of the URL
+    function getLastPartURL(url) {
+        // remove trailing slash if present
+        url = url.replace(/\/$/, "");
+        // Split the URL by '/' and get the last element
+        const parts = url.split("/");
+        return parts[parts.length - 1];
+    }
+    
+    // get the full url
+    const longUrl = document.getElementById("urlValue").textContent;
+
+    // extract the last part
+    const shortUrl = getLastPartURL(longUrl);
+
+    // set the short url in the span
+    document.getElementById("shortValue").textContent = shortUrl;
+</script>
