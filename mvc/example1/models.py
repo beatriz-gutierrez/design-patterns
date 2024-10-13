@@ -96,7 +96,7 @@ class Url:
         return next(key for key, value in mapping_urls.items() if value == short_url)
 
     @staticmethod
-    def _increment_short_url_format(url: str):
+    def _increment_short_url_format(url: str = None):
         """
         Increments string, that is:
             a -> b
