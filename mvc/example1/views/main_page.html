@@ -3,5 +3,19 @@
         <input type="text" name="url" value="" />
         Link to shorten
     </label>
-    <input type="submit" value="OK">
-</form>"
+    <input type="submit" value="Shorten">
+</form>
+<form action="/lengthen/">
+    <label>
+        <input type="text" name="url" value="" />
+        Short url to expand
+    </label>
+    <input type="submit" value="Get full url version">
+</form>
+<form action="/redirect_to_full/">
+    <label>
+        <input type="text" name="path" value="" />
+        Url to go (short version)
+    </label>
+    <input type="submit" value="Go to url">
+</form>
