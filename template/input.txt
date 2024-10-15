@@ -1,0 +1,7 @@
+Hello
+World
+!!!
+One
+Word
+per
+line
