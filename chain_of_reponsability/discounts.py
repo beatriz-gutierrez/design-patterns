@@ -8,9 +8,10 @@ class Discounts():
     def __init__(self, 
                  discounts: List['BaseDiscount'], 
                  available_products: Dict[str, Product]) -> None:
-        self._discounts = discounts
-        self._available_products = available_products
+        self._discounts: Optional[List['BaseDiscount']] = discounts
+        self._available_products: Optional[Dict[str, Product]] = available_products
 
+        # TODO: why we do this for here?
         discounts_count = len(self._discounts)
         for index, discount in enumerate(self._discounts):
             if index < (discounts_count - 1):
@@ -28,7 +29,7 @@ class BaseDiscount(ABC):
 
     def __init__(self) -> None:
         # typing: forward reference
-        self._next_discount: Optional["BaseDiscount"] = None
+        self._next_discount: Optional['BaseDiscount'] = None
 
     def set_next(self, discount: 'BaseDiscount') -> None:
         self._next_discount = discount
@@ -49,6 +50,8 @@ class BaseDiscount(ABC):
         return discount + self._next_discount.execute(products, available_products)
 
 
+# --- Available discount imlementations: ---
+
 class NoDiscount(BaseDiscount):
 
     def calculate_discount(self,
@@ -60,9 +63,9 @@ class NoDiscount(BaseDiscount):
 class BuyNGetOneFreeDiscount(BaseDiscount):
 
     def __init__(self, product_code: str, amount: int) -> None:
-        super.__init__()
-        self._product_code = product_code
-        self._amount = amount
+        super().__init__()
+        self._product_code: str = product_code
+        self._amount: int = amount
  
     def calculate_discount(self,
                            products: Dict[str, int],
@@ -83,10 +86,10 @@ class BulkPurchasePriceDiscount(BaseDiscount):
     # Buy N units to have a reduced per unit price
 
     def __init__(self, product_code: str, amount: int, reduced_price: int) -> None:
-        super.__init__()
-        self._product_code = product_code
-        self._amount = amount
-        self._reduced_price = reduced_price
+        super().__init__()
+        self._product_code: str = product_code
+        self._amount: int = amount
+        self._reduced_price: int = reduced_price
 
     def calculate_discount(self,
                            products: Dict[str, int],
@@ -97,7 +100,7 @@ class BulkPurchasePriceDiscount(BaseDiscount):
             return discount
 
         quantity = products[self._product_code]
-        while quantity >= self._amount:
+        if quantity >= self._amount:
             original_aggregated_price = available_products[self._product_code].price * quantity
             discount = original_aggregated_price - self._reduced_price * quantity
 
