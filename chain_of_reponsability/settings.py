@@ -11,7 +11,7 @@ PRODUCT_CODE_C = "PRODUCT CODE #3"
 # Products avaible to be purchased
 AVAILABLE_PRODUCTS = [
     Product(
-        code=PRODUCT_CODE_A, friendly_name="Product A user-friendly name", price=500
+        code=PRODUCT_CODE_A, friendly_name="Product A user-friendly name", price=500 # euro cents
     ),
     Product(
         code=PRODUCT_CODE_B, friendly_name="Product B user-friendly name", price=1000

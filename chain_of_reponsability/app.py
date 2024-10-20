@@ -1,6 +1,5 @@
 import settings
 from discounts import Discounts
-from product import Product
 from checkout import Checkout
 
 

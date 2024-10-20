@@ -14,7 +14,6 @@ class Checkout:
 
     @property
     def total(self) -> str:
-        # TODO: why divide by 100
         return f"{self._shopping_cart.total_amount / 100:.2f} €"
     
     @property

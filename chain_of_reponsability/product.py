@@ -1,8 +1,9 @@
+# TODO: dataclass
 class Product:
     def __init__(self, code: str, friendly_name: str, price: int) -> None:
         self._code = code
         self._friendly_name = friendly_name
-        self._price = price
+        self._price = price # euro cents
 
     @property
     def code(self) -> str:

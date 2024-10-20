@@ -3,6 +3,7 @@ from typing import Dict, List, Optional
 
 from product import Product
 
+# The class the operates with the chain
 class Discounts():
 
     def __init__(self, 
@@ -11,7 +12,6 @@ class Discounts():
         self._discounts: Optional[List['BaseDiscount']] = discounts
         self._available_products: Optional[Dict[str, Product]] = available_products
 
-        # TODO: why we do this for here?
         discounts_count = len(self._discounts)
         for index, discount in enumerate(self._discounts):
             if index < (discounts_count - 1):
@@ -21,7 +21,6 @@ class Discounts():
         if not self._discounts:
             raise ValueError("Need to have setup at least one discount.")
 
-        # TODO: why index 0?
         return self._discounts[0].execute(products, self._available_products)
 
 
@@ -38,6 +37,7 @@ class BaseDiscount(ABC):
     def calculate_discount(self, 
                            products: Dict[str, int],
                            available_products: Dict[str, Product]) -> int:
+        # raise not implement exception
         pass
 
     def execute(self, 
