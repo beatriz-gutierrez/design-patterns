@@ -36,6 +36,7 @@ class SQLQueryBuilder:
         return self
 
     # "builder" method
+    # TODO: what value does this method add?
     def get_query(self) -> str:
         self._query.set_query(self._base_query)
         return self._query.get_query()
