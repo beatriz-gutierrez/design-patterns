@@ -37,8 +37,6 @@ class Director:
     ) -> str:
         return self.builder.reset().select(table, columns).where(condition).get_query()
 
-    # TODO: add a property to get the builder and being able to call it 
-    # through the director to create the query
     def build_select_with_order_by(
         self,
         table: str,

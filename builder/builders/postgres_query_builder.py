@@ -16,7 +16,6 @@ class PostgresSQLQueryBuilder(QueryBuilder):
         self.reset()
 
     def reset(self) -> "PostgresSQLQueryBuilder":
-        self._query = SQLQuery()
         self._base_query = ""
         return self
 
@@ -49,5 +48,6 @@ class PostgresSQLQueryBuilder(QueryBuilder):
 
     # "builder" method
     def get_query(self) -> str:
-        self._query.set_query(self._base_query)
-        return self._query.get_query()
+        query = SQLQuery()
+        query.set_query(self._base_query)
+        return query.get_query()
