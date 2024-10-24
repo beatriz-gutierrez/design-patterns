@@ -1,16 +1,15 @@
 from sql_query import SQLQuery
 from typing import List, Optional
+from builders.query_builder import QueryBuilder
 
 # Most methods return self to allow method chaining
 # (very typical in the Builder pattern)
 
-
-class SQLQueryBuilder:
+class SQLQueryBuilder(QueryBuilder):
     def __init__(self) -> None:
         self.reset()
 
     def reset(self) -> "SQLQueryBuilder":
-        self._query = SQLQuery()
         self._base_query = ""
         return self
 
@@ -35,8 +34,12 @@ class SQLQueryBuilder:
         self._base_query += f" LIMIT {limit}"
         return self
 
-    # "builder" method
-    # TODO: what value does this method add?
+    def pattern_match(self, column: str, pattern: str) -> "SQLQueryBuilder":
+        self._base_query += f" WHERE {column} LIKE '{pattern}'"
+        return self
+
     def get_query(self) -> str:
-        self._query.set_query(self._base_query)
-        return self._query.get_query()
+        # delegate the instantiation to the end
+        query = SQLQuery()
+        query.set_query(self._base_query)
+        return query.get_query()

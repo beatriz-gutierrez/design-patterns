@@ -1,6 +1,9 @@
+from dataclasses import dataclass
+
+@dataclass
 class SQLQuery:
-    def __init__(self) -> None:
-        self.query = ""
+
+    query: str = ""
 
     def set_query(self, query: str) -> None:
         self.query = query

@@ -1,11 +1,10 @@
-from sql_query_builder import SQLQueryBuilder
-from postgres_query_builder import PostgresSQLQueryBuilder
+from builders.sql_query_builder import SQLQueryBuilder
+from builders.postgres_query_builder import PostgresSQLQueryBuilder
 from typing import List, Optional
 from enum import Enum
 
 # The director controls the building process using a builder instance.
 # We will have as many builders as SQL dialects (MySQL, PostgreSQL, BigQuery, etc.)
-# TODO: check if this idea is correct
 
 
 # Predefined methods for building specific types of queries
@@ -16,9 +15,8 @@ class QueryType(Enum):
 
 class Director:
 
-    # TODO: is it correct to pass the builder type as a parameter?
     def __init__(
-        self, builder_type: Optional[QueryType] = QueryType.SQLQueryBuilder
+        self, builder_type: Optional[QueryType] = None
     ) -> None:
         if builder_type == QueryType.SQLQueryBuilder:
             self.builder = SQLQueryBuilder()
@@ -26,6 +24,10 @@ class Director:
             self.builder = PostgresSQLQueryBuilder()
         else:
             raise ValueError("Invalid builder type")
+
+    @property
+    def get_builder(self):
+        return self.builder
 
     def build_simple_select_query(self, table: str, columns: List[str]) -> str:
         return self.builder.reset().select(table, columns).get_query()
@@ -35,6 +37,8 @@ class Director:
     ) -> str:
         return self.builder.reset().select(table, columns).where(condition).get_query()
 
+    # TODO: add a property to get the builder and being able to call it 
+    # through the director to create the query
     def build_select_with_order_by(
         self,
         table: str,

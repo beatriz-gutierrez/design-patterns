@@ -1,5 +1,6 @@
 from sql_query import SQLQuery
 from typing import List, Optional
+from builders.query_builder import QueryBuilder
 
 # Most methods return self to allow method chaining
 # (very typical in the Builder pattern)
@@ -10,7 +11,7 @@ from typing import List, Optional
 # UPDATE, or DELETE operation.
 
 
-class PostgresSQLQueryBuilder:
+class PostgresSQLQueryBuilder(QueryBuilder):
     def __init__(self) -> None:
         self.reset()
 
@@ -42,13 +43,8 @@ class PostgresSQLQueryBuilder:
         self._base_query += f" LIMIT {limit}"
         return self
 
-    def ilike(self, column: str, pattern: str) -> "PostgresSQLQueryBuilder":
+    def pattern_match(self, column: str, pattern: str) -> "PostgresSQLQueryBuilder":
         self._base_query += f" WHERE {column} ILIKE '{pattern}'"
-        return self
-
-    def returning(self, columns: List[str]) -> "PostgresSQLQueryBuilder":
-        columns_part = ", ".join(columns)
-        self._base_query += f" RETURNING {columns_part}"
         return self
 
     # "builder" method
