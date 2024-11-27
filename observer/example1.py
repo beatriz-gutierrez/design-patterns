@@ -6,7 +6,7 @@ class Observer(ABC):
 
     @abstractmethod
     def notify(self, timestamp: datetime) -> None:
-        pass
+        return NotImplementedError
 
 
 class UsaTimeObserver(Observer):
@@ -35,14 +35,14 @@ class Subject:
         self._observers = []
         self._current_time = None
 
-    def register_observer(self, observer):
-        
+    def register_observer(self, observer: "Observer"):
+
         if observer in self._observers:
             print(f"{observer} observer already in subscribed observers list.")
-        
+
         self._observers.append(observer)
 
-    def unregister_observer(self, observer):
+    def unregister_observer(self, observer: "Observer"):
 
         try:
             self._observers.remove(observer)
