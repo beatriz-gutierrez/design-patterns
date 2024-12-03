@@ -23,7 +23,7 @@ class Light:
 class Command(ABC):
     @abstractmethod
     def execute(self) -> None:
-        pass
+        raise NotImplementedError()
 
 
 # Concrete Command
