@@ -2,9 +2,9 @@
 
 
 class Singleton:
-    _instande = None
+    _instance = None
 
-    def __new__(cls, *args, **kwargs) -> Singleton:
+    def __new__(cls, *args, **kwargs) -> "Singleton":
         if cls._instance is None:
             cls.instance = super().__new__(cls, *args, **kwargs)
         return cls._instance
