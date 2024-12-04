@@ -12,15 +12,15 @@ class AbstractFactory(ABC):
 
     @abstractmethod
     def create_protocol(self):
-        pass
+        raise NotImplementedError()
 
     @abstractmethod
     def create_port(self):
-        pass
+        raise NotImplementedError()
 
     @abstractmethod
     def create_parser(self):
-        pass
+        raise NotImplementedError()
 
 
 class HTTPFactory(AbstractFactory):

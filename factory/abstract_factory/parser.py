@@ -9,7 +9,7 @@ class Parser(ABC):
 
     @abstractmethod
     def __call__(self, content):
-        pass
+        raise NotImplementedError()
 
 class HTTPParser(Parser):
     """
@@ -22,7 +22,7 @@ class HTTPParser(Parser):
         for link in links:
             filenames.append(link.text)
         return '\n'.join(filenames)
-    
+
 
 class FTPParser(Parser):
     """

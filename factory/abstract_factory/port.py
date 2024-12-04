@@ -11,7 +11,7 @@ class Port(ABC):
         """
         A string representation of the port
         """
-        pass
+        raise NotImplementedError()
 
 class HTTPPort(Port):
     """
@@ -19,20 +19,17 @@ class HTTPPort(Port):
     """
     def __str__(self):
         return '80'
-    
+
 class HTTPSecurePort(Port):
     """
     A concrete product which represents HTTPS port.
     """
     def __str__(self):
         return '443'
-    
+
 class FTPPort(Port):
     """
     A concrete product which represents FTP port.
     """
     def __str__(self):
         return '21'
-    
-
-    
